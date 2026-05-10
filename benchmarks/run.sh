@@ -34,7 +34,7 @@ assert_no_scaffold() {
 
 run_case() {
   case_name=$1
-  marker=$2
+  shift
   src_dir=$cases_dir/$case_name
   workdir=$tmp_root/$case_name
 
@@ -46,17 +46,43 @@ run_case() {
   printf 'case: %s\n' "$case_name"
   (
     cd "$workdir"
-    "$render_script" diagram.hs -o build/diagram.pdf --pgf build/diagram.pgf
+    "$render_script" diagram.hs -o build/diagram.pdf --pgf build/diagram.pgf -w 1200
   )
 
   assert_file_nonempty "$workdir/build/diagram.pdf"
   assert_file_nonempty "$workdir/build/diagram.pgf"
-  grep -q "$marker" "$workdir/build/diagram.pgf" ||
-    fail "marker not found in generated PGF for $case_name: $marker"
+  for marker in "$@"; do
+    grep -q "$marker" "$workdir/build/diagram.pgf" ||
+      fail "marker not found in generated PGF for $case_name: $marker"
+  done
   assert_no_scaffold "$workdir"
 }
 
-run_case basic-chinese "汉字测试"
-run_case framework-labels "社会支持感知"
+run_case paper-figure-corpus \
+  "egg" \
+  "Build Systems" \
+  "MLIR" \
+  "LLVM" \
+  "Transformer" \
+  "ResNet" \
+  "U-Net" \
+  "BERT" \
+  "AlphaFold" \
+  "MapReduce" \
+  "Raft" \
+  "D3" \
+  "PRISMA 2020" \
+  "CONSORT 2010" \
+  "EBM-DPSER" \
+  "EGT" \
+  "WASH" \
+  "DTx RWE" \
+  "UFIT" \
+  "NASSS" \
+  "等式饱和" \
+  "编译器流水线" \
+  "注意力架构" \
+  "综述流程" \
+  "多域框架"
 
 printf 'PASS: diagrams-pgf-chinese micro-benchmark\n'
