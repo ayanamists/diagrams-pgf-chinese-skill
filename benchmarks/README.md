@@ -26,3 +26,5 @@ Pass criteria:
 4. The case workspace has no copied scaffold files.
 
 Future visual benchmarks should add PNG rendering plus a small rubric for typography, hierarchy, density, alignment, and print suitability.
+
+For agent-level evaluation of the installed skill, see `agent-baseline/`. That harness asks Claude Code to solve the 20 paper-derived tasks in isolated workspaces and scores execution artifacts separately from visual quality.

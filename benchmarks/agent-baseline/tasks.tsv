@@ -1,0 +1,21 @@
+id	marker	category	title	page	pattern
+01	egg	PL	egg: Fast and Extensible Equality Saturation	https://arxiv.org/abs/2004.03082	Expression-to-e-graph pipeline with rewrite and analysis side nodes.
+02	Build Systems	PL	Build Systems a la Carte	https://arxiv.org/abs/1802.05365	Task dependency DAG plus scheduler/store relation.
+03	MLIR	PL	MLIR: A Compiler Infrastructure for the End of Moore's Law	https://arxiv.org/abs/2002.11054	Stacked compiler dialect and lowering layers.
+04	LLVM	PL	LLVM: A Compilation Framework for Lifelong Program Analysis and Transformation	https://llvm.org/pubs/2004-01-30-CGO-LLVM.html	Front end, IR, optimizer, and target back end pipeline.
+05	Transformer	ML	Attention Is All You Need	https://arxiv.org/abs/1706.03762	Encoder-decoder architecture with input/output embeddings.
+06	ResNet	ML	Deep Residual Learning for Image Recognition	https://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html	Sequential convolution blocks with identity skip connection.
+07	U-Net	ML	U-Net: Convolutional Networks for Biomedical Image Segmentation	https://arxiv.org/abs/1505.04597	Symmetric encoder-decoder path with skip connection.
+08	BERT	ML	BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding	https://arxiv.org/abs/1810.04805	Token encoder feeding multiple training objectives.
+09	AlphaFold	ML	Highly accurate protein structure prediction with AlphaFold	https://www.nature.com/articles/s41586-021-03819-2	Sequence/MSA input, trunk processing, and structure output.
+10	MapReduce	Systems	MapReduce: Simplified Data Processing on Large Clusters	https://research.google/pubs/mapreduce-simplified-data-processing-on-large-clusters/	Input, map, shuffle, reduce, and master coordination.
+11	Raft	Systems	In Search of an Understandable Consensus Algorithm	https://raft.github.io/raft.pdf	Follower, candidate, and leader state machine.
+12	D3	Visualization	D3: Data-Driven Documents	https://doi.org/10.1109/TVCG.2011.185	Data, join, DOM, and view pipeline.
+13	PRISMA 2020	Methods	PRISMA 2020 statement	https://journals.plos.org/plosmedicine/article/figure?id=10.1371/journal.pmed.1003583.g001	Lane-based screening flowchart with exclusions and final inclusion.
+14	CONSORT 2010	Methods	CONSORT 2010 Statement	https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000251	Assessed, randomized, allocated, and analyzed trial flow.
+15	EBM-DPSER	Framework	The EBM-DPSER Conceptual Model	https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0070766	Causal chain with ecosystem-services emphasis and feedback response.
+16	EGT	Framework	Engaging in the Good with Technology	https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1175740/full	Triadic model with a central technology-use node.
+17	WASH	Framework	The Applications of Implementation Science in WASH Research and Practice	https://pmc.ncbi.nlm.nih.gov/articles/PMC8207965/	Staged implementation pipeline from intervention to population impact.
+18	DTx RWE	Framework	The Digital Therapeutics Real-World Evidence Framework	https://pmc.ncbi.nlm.nih.gov/articles/PMC10951831/	Lifecycle phases with decision/review nodes.
+19	UFIT	Framework	User-Centered Framework for Implementation of Technology	https://pmc.ncbi.nlm.nih.gov/articles/PMC11150893/	Central user-centered design node connected to surrounding theory domains.
+20	NASSS	Framework	Empirical Application of the NASSS Framework	https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-018-1050-6	Multi-domain technology implementation framework.
