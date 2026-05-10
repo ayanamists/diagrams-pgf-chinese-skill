@@ -7,27 +7,25 @@ description: Create and maintain Haskell diagrams-pgf diagrams that render Chine
 
 Use this skill to produce code-generated diagrams with Haskell `diagrams-pgf` and compile them through XeLaTeX with `ctex`. Prefer it when the diagram needs LaTeX-quality vector output, paper-consistent typography, formulas, reproducible layout, or programmatic generation.
 
+Keep the target repository non-invasive by default. Do not copy a `flake.nix`, TeX wrapper, Makefile, or template tree into a user project unless the user explicitly asks for committed project scaffolding.
+
 ## Quick Start
 
-For a new project, run the bundled initializer from the skill directory:
+For a repo that already has a diagram source file, render it without adding Nix files:
 
 ```sh
-${CLAUDE_SKILL_DIR}/scripts/init-diagrams-pgf-project.sh /path/to/project
+${CLAUDE_SKILL_DIR}/scripts/render-diagrams-pgf.sh diagram.hs -o build/diagram.pdf
 ```
 
-It copies a working template containing:
+The script creates a temporary Nix environment and TeX wrapper outside the repo. It writes only the requested output path. Use `--pgf build/diagram.pgf` when the intermediate PGF should be kept.
 
-- `flake.nix`: GHC with `diagrams-pgf`, plus XeLaTeX/PGF/CTeX.
-- `diagram.hs`: minimal Haskell diagram with Chinese text.
-- `wrapper.tex`: `standalone + ctex + pgf` wrapper for the generated PGF.
-- `Makefile`: `make` builds `build/diagram.pgf` and `build/diagram.pdf`.
+When creating a new diagram, add only a source file such as `diagram.hs` unless the user asks for more project files.
 
-For an existing repo, copy only the files that match the local conventions. Keep user files and unrelated build systems untouched.
+If a repo already has its own `flake.nix`, `Makefile`, or build system, integrate with that local convention instead of replacing it.
 
 ## Workflow
 
-1. Ensure the project has a working Nix shell with `diagrams-pgf`, `xelatex`, `ctex`, `pgf`, and `standalone`. Reuse `assets/diagrams-pgf-project/flake.nix` when no local Nix convention exists.
-2. Write the diagram as Haskell and render to `.pgf`, not directly to bitmap. Annotate ambiguous diagrams with a concrete PGF type:
+1. Write the diagram as Haskell. Annotate ambiguous diagrams with a concrete PGF type:
 
 ```haskell
 import Diagrams.Backend.PGF
@@ -42,7 +40,13 @@ main :: IO ()
 main = mainWith dia
 ```
 
-3. Wrap the generated PGF with XeLaTeX:
+2. Render non-invasively:
+
+```sh
+${CLAUDE_SKILL_DIR}/scripts/render-diagrams-pgf.sh diagram.hs -o build/diagram.pdf --pgf build/diagram.pgf
+```
+
+3. If the user needs to embed the PGF manually, wrap it with XeLaTeX:
 
 ```tex
 \documentclass[border=2pt]{standalone}
@@ -53,13 +57,11 @@ main = mainWith dia
 \end{document}
 ```
 
-4. Validate with an end-to-end build:
+4. Validate with an end-to-end build. For the bundled script:
 
 ```sh
-nix develop -c make
+${CLAUDE_SKILL_DIR}/scripts/render-diagrams-pgf.sh diagram.hs -o build/diagram.pdf
 ```
-
-If the flake files are new and the project is a Git repo, `nix develop` may not see untracked files. Use `nix develop path:$PWD -c make` until the files are added to Git.
 
 ## Chinese Text Rules
 
