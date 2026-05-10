@@ -1,10 +1,30 @@
 # diagrams-pgf-chinese
 
-Claude Code skill/plugin for rendering Haskell `diagrams-pgf` diagrams that contain Chinese text.
+Codex skill and Claude Code plugin for rendering Haskell `diagrams-pgf` diagrams that contain Chinese text.
 
 The default workflow is non-invasive: it does not copy a `flake.nix`, Makefile, TeX wrapper, or template tree into the target project. The bundled render script creates the Nix environment and XeLaTeX wrapper in a temporary directory, then writes only the requested output files.
 
-## Install
+## Install in Codex
+
+Install the skill into `$CODEX_HOME/skills`, which defaults to `~/.codex/skills`:
+
+```sh
+python "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
+  --repo ayanamists/diagrams-pgf-chinese-skill \
+  --path skills/diagrams-pgf-chinese
+```
+
+Restart Codex after installing so the new skill is loaded.
+
+For a local checkout during development, symlink the skill directory:
+
+```sh
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+ln -s /path/to/diagrams-pgf-chinese-skill/skills/diagrams-pgf-chinese \
+  "${CODEX_HOME:-$HOME/.codex}/skills/diagrams-pgf-chinese"
+```
+
+## Install in Claude Code
 
 Add this repository as a Claude Code plugin marketplace, then install the plugin:
 
@@ -22,7 +42,7 @@ claude plugin install diagrams-pgf-chinese@diagrams-pgf-chinese-tools
 
 ## Use
 
-Ask Claude Code to use the installed skill:
+Ask Codex or Claude Code to use the installed skill:
 
 ```text
 Use $diagrams-pgf-chinese to render diagram.hs with Chinese text.
@@ -43,10 +63,11 @@ main :: IO ()
 main = mainWith dia
 ```
 
-Then it can render without adding project scaffolding:
+Then it can render without adding project scaffolding. In Codex, the installed skill directory is usually `${CODEX_HOME:-$HOME/.codex}/skills/diagrams-pgf-chinese`:
 
 ```sh
-${CLAUDE_SKILL_DIR}/scripts/render-diagrams-pgf.sh diagram.hs -o build/diagram.pdf --pgf build/diagram.pgf
+"${CODEX_HOME:-$HOME/.codex}/skills/diagrams-pgf-chinese/scripts/render-diagrams-pgf.sh" \
+  diagram.hs -o build/diagram.pdf --pgf build/diagram.pgf
 ```
 
 ## Requirements

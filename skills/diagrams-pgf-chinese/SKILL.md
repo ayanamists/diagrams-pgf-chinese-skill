@@ -1,6 +1,6 @@
 ---
 name: diagrams-pgf-chinese
-description: Create and maintain Haskell diagrams-pgf diagrams that render Chinese text through PGF/XeLaTeX. Use when Codex needs to set up a Nix-backed diagrams-pgf environment, generate PGF/PDF diagrams for papers, render labels containing Chinese characters, or choose between diagrams-pgf, Mermaid, and drawio for code-generated diagrams.
+description: Create and maintain Haskell diagrams-pgf diagrams that render Chinese text through PGF/XeLaTeX. Use when Codex needs to render PGF/PDF diagrams non-invasively, handle Chinese labels, use the bundled Nix-backed render script, or choose between diagrams-pgf, Mermaid, and drawio for code-generated diagrams.
 ---
 
 # Diagrams PGF Chinese
@@ -9,12 +9,14 @@ Use this skill to produce code-generated diagrams with Haskell `diagrams-pgf` an
 
 Keep the target repository non-invasive by default. Do not copy a `flake.nix`, TeX wrapper, Makefile, or template tree into a user project unless the user explicitly asks for committed project scaffolding.
 
+Resolve the skill directory before running bundled scripts. In Codex this is normally `${CODEX_HOME:-$HOME/.codex}/skills/diagrams-pgf-chinese`; in Claude Code it may be exposed as `${CLAUDE_SKILL_DIR}`. Do not assume `CLAUDE_SKILL_DIR` exists in Codex.
+
 ## Quick Start
 
 For a repo that already has a diagram source file, render it without adding Nix files:
 
 ```sh
-${CLAUDE_SKILL_DIR}/scripts/render-diagrams-pgf.sh diagram.hs -o build/diagram.pdf
+"${CODEX_HOME:-$HOME/.codex}/skills/diagrams-pgf-chinese/scripts/render-diagrams-pgf.sh" diagram.hs -o build/diagram.pdf
 ```
 
 The script creates a temporary Nix environment and TeX wrapper outside the repo. It writes only the requested output path. Use `--pgf build/diagram.pgf` when the intermediate PGF should be kept.
@@ -43,7 +45,7 @@ main = mainWith dia
 2. Render non-invasively:
 
 ```sh
-${CLAUDE_SKILL_DIR}/scripts/render-diagrams-pgf.sh diagram.hs -o build/diagram.pdf --pgf build/diagram.pgf
+"${CODEX_HOME:-$HOME/.codex}/skills/diagrams-pgf-chinese/scripts/render-diagrams-pgf.sh" diagram.hs -o build/diagram.pdf --pgf build/diagram.pgf
 ```
 
 3. If the user needs to embed the PGF manually, wrap it with XeLaTeX:
@@ -60,7 +62,7 @@ ${CLAUDE_SKILL_DIR}/scripts/render-diagrams-pgf.sh diagram.hs -o build/diagram.p
 4. Validate with an end-to-end build. For the bundled script:
 
 ```sh
-${CLAUDE_SKILL_DIR}/scripts/render-diagrams-pgf.sh diagram.hs -o build/diagram.pdf
+"${CODEX_HOME:-$HOME/.codex}/skills/diagrams-pgf-chinese/scripts/render-diagrams-pgf.sh" diagram.hs -o build/diagram.pdf
 ```
 
 ## Chinese Text Rules
