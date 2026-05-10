@@ -1,0 +1,4 @@
+interface:
+  display_name: "Diagrams PGF Chinese"
+  short_description: "Create Chinese diagrams with diagrams-pgf"
+  default_prompt: "Use $diagrams-pgf-chinese to create a Nix-backed diagrams-pgf project that renders Chinese text."

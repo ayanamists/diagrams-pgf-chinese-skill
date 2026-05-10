@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
+  "name": "diagrams-pgf-chinese-tools",
+  "description": "Claude Code plugins for diagrams-pgf and Chinese PGF/XeLaTeX workflows.",
+  "version": "0.1.0",
+  "owner": {
+    "name": "Local"
+  },
+  "plugins": [
+    {
+      "name": "diagrams-pgf-chinese",
+      "source": "./",
+      "description": "Generate Haskell diagrams-pgf diagrams with Chinese text rendered by ctex and XeLaTeX.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Local"
+      }
+    }
+  ]
+}
