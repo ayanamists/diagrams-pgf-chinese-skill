@@ -65,6 +65,8 @@ main = mainWith dia
 "${CODEX_HOME:-$HOME/.codex}/skills/diagrams-pgf-chinese/scripts/render-diagrams-pgf.sh" diagram.hs -o build/diagram.pdf
 ```
 
+When modifying this skill repository itself, run `benchmarks/run.sh` before declaring the change complete. The benchmark verifies Chinese rendering, PGF/PDF output, and non-invasive behavior.
+
 ## Chinese Text Rules
 
 Use `ctex` with XeLaTeX as the default Chinese path. Do not start by forcing external Noto or Source Han TTC collection fonts unless the user explicitly needs a specific font.

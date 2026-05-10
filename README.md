@@ -78,6 +78,16 @@ Then it can render without adding project scaffolding. In Codex, the installed s
 
 The render environment includes GHC, `diagrams-pgf`, `ctex`, `pgf`, `standalone`, and XeLaTeX.
 
+## Micro Benchmark
+
+Run the deterministic smoke benchmark before changing the skill:
+
+```sh
+benchmarks/run.sh
+```
+
+It renders fixed Chinese diagram cases, checks PDF/PGF outputs, verifies expected Chinese labels in the PGF, and confirms the target workspace does not receive scaffold files.
+
 ## Why This Exists
 
 `diagrams-pgf` is useful when diagrams need reproducible, code-generated structure and LaTeX-quality output. It is a better fit than Mermaid or drawio for diagrams that should be parameterized, typechecked, or visually consistent with a paper.
