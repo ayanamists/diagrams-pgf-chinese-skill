@@ -10,6 +10,7 @@ run_id=${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)}
 run_dir=$baseline_dir/runs/$run_id
 max_tasks=${MAX_TASKS:-}
 budget=${CLAUDE_MAX_BUDGET_USD:-2}
+prepare_only=${PREPARE_ONLY:-0}
 
 mkdir -p "$run_dir"
 
@@ -82,7 +83,19 @@ Diagram requirements:
 When finished, briefly state the files created.
 EOF
 
+  brief_file=$baseline_dir/briefs/$id.md
+  if [ -f "$brief_file" ]; then
+    {
+      printf '\nAdditional paper brief:\n\n'
+      cat "$brief_file"
+    } >> "$task_dir/prompt.md"
+  fi
+
   printf 'task %s: %s\n' "$id" "$marker"
+  if [ "$prepare_only" = "1" ]; then
+    continue
+  fi
+
   (
     cd "$task_dir"
     CLAUDE_SKILL_DIR=$skill_dir claude -p \
@@ -99,6 +112,11 @@ EOF
       2> claude-stderr.log
   ) || printf 'task %s failed during Claude run; scoring will record artifacts\n' "$id" >&2
 done
+
+if [ "$prepare_only" = "1" ]; then
+  printf 'prepared prompts only: %s\n' "$run_dir"
+  exit 0
+fi
 
 "$baseline_dir/score-run.sh" "$run_dir"
 printf 'baseline run: %s\n' "$run_dir"
